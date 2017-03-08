@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+  <title>Kritik Yedekleme</title>
+  <script src="assets/angular.min.js"></script>
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+  <script src="assets/jquery.min.js"></script>
+  <link rel="stylesheet" href="assets/materialize/css/materialize.css"/>
+  <script src="assets/materialize/js/hammer.min.js"></script>
+  <script src="assets/materialize/js/materialize.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    .footer-menu {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      padding: 1rem;
+      background-color: #efefef;
+      text-align: center;
+    }
+
+    .navBardemoBasicUsage md-content .ext-content {
+      padding: 50px;
+      margin: 20px;
+      background-color: #FFF2E0; }
+    </style>
+    <script>
+      function openFile() {
+        console.log(123);
+//        dialog.showOpenDialog(function (fileNames) {
+//
+//        });
+
+        //console.log(dialog.showOpenDialog({properties: ['openFile', 'openDirectory', 'multiSelections']}));
+        console.log(dialog)
+
+      }
+
+//      document.getElementById('party').addEventListener('click', _ => {
+//        document.getElementById('business').click()
+//      })
+      function Open() {
+        document.getElementById('business').click()
+      }
+    </script>
+  </head>
+  <body ng-app="myApp" ng-controller = "currentPageCtrl">
+  <div ng-include="'inc/nav.html'"></div>
+  <div class="container">
+  <!--  <button id="party" class="very-sweet-looking" onclick="Open();">Open</button>
+    <input id="business" type="file" style="display: none" />-->
+  <!--<a href="#" onclick="copyFile();">Kopyala</a>-->
+  <!--<a href="#" onclick="createZip();">Ziple</a>-->
+  <!--<button id="openFile" onclick="openFile();">Open</button>-->
+  <!--<button id="saveFile">Save</button>-->
+  <br/><br/>
+  <div ng-include="page"></div>
+</div>
+<div ng-include="'inc/footer.html'"></div>
+<script>
+      var app = angular.module('myApp', []);
+      app.controller('currentPageCtrl', ['$scope', function ($scope) {
+          $scope.page = "anasayfa.html";
+          $scope.goToPage = function (currentPage) {
+            $scope.page = currentPage + '.html';
+          };
+        }]);
+
+      app.run(function ($rootScope) {
+        $rootScope.$on("$includeContentLoaded", function (event, templateName) {
+          console.log(templateName);
+//          $('.collapsible').collapsible();
+          $('ul.tabs').tabs();
+
+        });
+      });
+
+      $(document).ready(function () {
+        $(".button-collapse").sideNav();
+      })
+</script>
+<script src="js/copy_directory.js"></script>
+<script src="js/create_zip.js"></script>
+<script src="js/fs.js"></script>
+
+</body>
+</html>
