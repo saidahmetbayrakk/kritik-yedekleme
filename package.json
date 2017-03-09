@@ -1,0 +1,14 @@
+{
+  "name": "Kritik.Yedekleme", "version": "0.1.0", "main": "main.js", "description": "Kritik Yedekleme Uygulaması", "homepage": "https://github.com/ertegun/kritik-yedekleme", "author": "Kritik Takım", "build": {
+    "appId": "com.electron.kritikyedekleme", "win": {
+      "icon": "logo.ico"
+    }
+  }, "scripts": {
+    "all": "npm run build && npm run release", "build": "build -mlw --ia32 --x64", "release": "npm run release:mac && npm run release:windows-32 && npm run release:windows-64 && npm run release:linux-32 && npm run release:linux-64", "prerelease:mac": "rm -rf releases/$npm_package_version/mac && mkdirp releases/$npm_package_version/mac", "release:mac": "cp -R dist/mac/*.dmg releases/$npm_package_version/mac/$npm_package_name-$npm_package_version.dmg", "prerelease:windows-32": "rm -rf releases/$npm_package_version/windows && mkdirp releases/$npm_package_version/windows", "release:windows-32": "cp -R dist/win-ia32/*.exe releases/$npm_package_version/windows/$npm_package_name-$npm_package_version-32.exe", "release:windows-64": "cp -R dist/win/*.exe releases/$npm_package_version/windows/$npm_package_name-$npm_package_version-64.exe", "prerelease:linux-32": "rm -rf releases/$npm_package_version/linux && mkdirp releases/$npm_package_version/linux", "release:linux-32": "cp -R dist/*-ia32.AppImage releases/$npm_package_version/linux/$npm_package_name-$npm_package_version-32.AppImage", "release:linux-64": "cp -R dist/*-x86_64.AppImage releases/$npm_package_version/linux/$npm_package_name-$npm_package_version-64.AppImage", "postrelease": "rm -rf dist"
+  }, "dependencies": {
+    "remote": "^0.2.6", "copy-dir": "^0.3.0", "easy-zip": "^0.0.4", "jquery": "^3.1.1"
+  }, "devDependencies":
+    {
+    "electron-builder": "^15.1.1"
+  }
+}
