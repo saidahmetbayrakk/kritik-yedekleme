@@ -8,77 +8,104 @@ function selectDirectory() {
     properties: ['openDirectory']
   })
 }
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
-let win
+
+let win = null
 let tray = null
 
 function createWindow() {
-// Create the browser window.
-  win = new BrowserWindow({show: false, icon: 'app/img/logo.ico'})
-//  win.hide();
-  win.show();
 
-
-  // and load the index.html of the app.
+  win = new BrowserWindow({icon: 'app/img/logo.ico'})
   win.loadURL(url.format({
     pathname: path.join(__dirname, 'app/index.html'),
     protocol: 'file:',
     slashes: true
   }))
-
-  win.setIcon('logo.ico')
-  // Open the DevTools.
   win.webContents.openDevTools()
-//win.BrowserWindow({show:false})
-  // Emitted when the window is closed.
-  win.on('closed', () => {
+}
+
+app.on('ready', () => {
+  createWindow();
+
+
+  win.onbeforeunload = (e) => {
+    console.log('I do not want to be closed')
+
+    // Unlike usual browsers that a message box will be prompted to users, returning
+    // a non-void value will silently cancel the close.
+    // It is recommended to use the dialog API to let the user confirm closing the
+    // application.
+    e.returnValue = false
+  }
+
+  win.on('close', (e) => {
+    console.log("close");
+//    console.log(e);
+
+    createWindow();
+//  event.preventDefault();
+    win.hide();
+
+    tray = new Tray('app/img/logo.ico')
+    const contextMenu = Menu.buildFromTemplate([
+      {
+        label: 'Aç',
+        accelerator: 'Alt+I',
+        click: function () {
+          win.show();
+//        win.toggleDevTools();
+        }
+      },
+      {label: 'Çıkış',
+        click: function () {
+          win = null
+          app.quit()
+        }
+      }
+    ]);
+    tray.setToolTip('Kritik Yedekleme')
+    tray.setContextMenu(contextMenu)
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
-    win = null
+//    win = null
   })
-  tray = new Tray('app/img/logo.ico')
-  const contextMenu = Menu.buildFromTemplate([
-    {
-      label: 'Aç',
-      accelerator: 'Alt+I',
-      click: function () {
-        win.show();
-//        win.toggleDevTools();
-      }
-    },
-    {label: 'Çıkış',
-      click: function () {
-        app.quit()
-      }
-    }
-  ])
-  tray.setToolTip('Kritik Yedekleme')
-  tray.setContextMenu(contextMenu)
+  win.on('closed', (e) => {
+    console.log("closed");
+//    console.log(e);
+    e.returnValue = false
+  })
 
+  win.onbeforeunload = (e) => {
+    console.log('I do not want to be closed')
+
+    // Unlike usual browsers that a message box will be prompted to users, returning
+    // a non-void value will silently cancel the close.
+    // It is recommended to use the dialog API to let the user confirm closing the
+    // application.
+    e.returnValue = false
+  }
+  win.unload  = (e) => {
+  console.log('I do not want to be closed')
+
+  // Unlike usual browsers that a message box will be prompted to users, returning
+  // a non-void value will silently cancel the close.
+  // It is recommended to use the dialog API to let the user confirm closing the
+  // application.
+  e.returnValue = false
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
-app.on('ready', createWindow)
+})
 
-// Quit when all windows are closed.
 app.on('window-all-closed', () => {
-  // On macOS it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
 //  if (process.platform !== 'darwin') {
 //    app.quit()
-  win.hide();
-
+//  win.hide();
 //  }
 })
 
 app.on('activate', () => {
-  // On macOS it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if (win === null) {
-    createWindow()
+  if (win == null) {
+//    createWindow()
   }
 })
+
