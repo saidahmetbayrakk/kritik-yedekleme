@@ -11,6 +11,14 @@
     </div>
   </div>
   <div class="row">
+    <div class="input-field col s6">
+      <div class="chips"></div>
+
+      <!--<textarea id="yedeklenecekler" class="materialize-textarea"></textarea>-->
+      <!--<label for="yedeklenecekler" class="">Yedeklenecek Klasörler:</label>-->
+    </div>
+  </div>
+  <div class="row">
     <p>
     <input type="checkbox" id="gdrive" />
     <label for="gdrive">Google Drive 'a yedeklensin mi?</label>
@@ -27,13 +35,30 @@
     <input type="checkbox" id="box" />
     <label for="box">Box ' a yedeklensin mi?</label>
     </p>
-    <h1>Merhaba Dünya!</h1>
-    <p>Node versiyonu: <script>document.write(process.versions.node)</script></p>
-    <p>Chrome versiyonu: <script>document.write(process.versions.chrome)</script></p>
-    <p>Electron versiyonu: <script>document.write(process.versions.electron)</script></p>
-    <p>Platform: <script>document.write(process.platform)</script></p>
-    <script>console.log(process)</script>
   </div>
 </div>
 <div id="test-swipe-2" class="col s12 red">Test 2</div>
 <div id="test-swipe-3" class="col s12 green">Test 3</div>
+<script>
+  $('.chips').material_chip();
+//  $('.chips-initial').material_chip({
+//    data: [{
+//        tag: 'Apple',
+//      }, {
+//        tag: 'Microsoft',
+//      }, {
+//        tag: 'Google',
+//      }],
+//  });
+//  $('.chips-placeholder').material_chip({
+//    placeholder: 'Enter a tag',
+//    secondaryPlaceholder: '+Tag',
+//  });
+//  $('.chips-autocomplete').material_chip({
+//    autocompleteData: {
+//      'Apple': null,
+//      'Microsoft': null,
+//      'Google': null
+//    }
+//  });
+</script>
