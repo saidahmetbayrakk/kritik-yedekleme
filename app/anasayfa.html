@@ -1,1 +1,14 @@
-anasayfa
+<ul class="collection" ng-controller="MyBackupListInfo">
+  <li class="collection-item avatar" ng-repeat="myBackup in myBackupList">
+    <i class="material-icons circle">folder</i>
+    <span class="title">{{myBackup.BackupName}}</span>
+    <p>Son yedekleme zamanı : {{myBackup.LastBackupTime}}<br>...
+    </p>
+    <a href="#" class="secondary-content">
+      <i class="material-icons red-text text-accent-4">remove_circle</i>
+      <i class="material-icons lime-text text-darken-3">mode_edit</i>
+      <i class="material-icons purple-text text-darken-4">backup</i>
+      <i class="material-icons">grade</i> 
+    </a>
+  </li>
+</ul>
