@@ -3,12 +3,20 @@
     <i class="material-icons circle">folder</i>
     <span class="title">{{myBackup.BackupName}}</span>
     <p>Son yedekleme zamanı : {{myBackup.LastBackupTime}}<br>...
+      <a class="btn tooltipped" data-tooltip="I am tooltip">Hover me!</a>
     </p>
     <a href="#" class="secondary-content">
-      <i class="material-icons red-text text-accent-4">remove_circle</i>
+      <span class="">
+        <i class="material-icons red-text text-accent-4 ">remove_circle</i>
+      </span>
       <i class="material-icons lime-text text-darken-3">mode_edit</i>
       <i class="material-icons purple-text text-darken-4">backup</i>
-      <i class="material-icons">grade</i> 
     </a>
   </li>
 </ul>
+<script>
+
+//  $(document).ready(function () {
+//    $('.tooltipped').tooltip({delay: 50});
+//  });
+</script>

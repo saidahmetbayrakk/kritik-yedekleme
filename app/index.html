@@ -51,6 +51,16 @@
 <div class="container scrollspy">
   <!--<a href="#" onclick="copyFile();">Kopyala</a>-->
   <!--<a href="#" onclick="createZip();">Ziple</a>-->
+  <!--  <div ng-controller="AppCtrl">
+      <md-button class="md-icon-button test-tooltip" aria-label="Refresh">
+        <md-tooltip md-direction="left">Refresh</md-tooltip>
+        <md-icon
+          md-svg-src="img/icons/ic_refresh_24px.svg"
+          style="width: 24px; height: 24px">
+        </md-icon>
+      </md-button>
+    </div>-->
+
   <div ng-include="page"></div>
 </div>
 <div ng-include="'inc/footer.html'"></div>
@@ -60,14 +70,16 @@
         $scope.page = "anasayfa.html";
         $scope.goToPage = function (currentPage) {
           $scope.page = currentPage + '.html';
+          console.log(123);
         };
       });
-
 
       app.run(function ($rootScope) {
         $rootScope.$on("$includeContentLoaded", function (event, templateName) {
           console.log(templateName);
           $('ul.tabs').tabs();
+          $('.tooltipped').tooltip({delay: 50});
+
         });
       });
 
@@ -78,6 +90,23 @@
         });
       });
 
+//      app.controller('AppCtrl', AppCtrl);
+//
+//      function AppCtrl($scope) {
+//        $scope.demo = {
+//          showTooltip: false,
+//          tipDirection: 'bottom'
+//        };
+//
+//        $scope.demo.delayTooltip = undefined;
+//        $scope.$watch('demo.delayTooltip', function (val) {
+//          $scope.demo.delayTooltip = parseInt(val, 10) || 0;
+//        });
+//      }
+
+
+
+      /*Jquery Codes Begin*/
       $(document).ready(function () {
         $(".button-collapse").sideNav();
         $('.scrollspy').scrollSpy();
