@@ -51,37 +51,34 @@
 <div class="container scrollspy">
   <!--<a href="#" onclick="copyFile();">Kopyala</a>-->
   <!--<a href="#" onclick="createZip();">Ziple</a>-->
-  <!--  <div ng-controller="AppCtrl">
-      <md-button class="md-icon-button test-tooltip" aria-label="Refresh">
-        <md-tooltip md-direction="left">Refresh</md-tooltip>
-        <md-icon
-          md-svg-src="img/icons/ic_refresh_24px.svg"
-          style="width: 24px; height: 24px">
-        </md-icon>
-      </md-button>
-    </div>-->
-
   <div ng-include="page"></div>
 </div>
 <div ng-include="'inc/footer.html'"></div>
 <script>
       var app = angular.module('myApp', []);
+
+      app.run(function ($rootScope) {
+        $rootScope.$on("$includeContentLoaded", function (event, templateName) {
+          console.log('templateName--' + templateName);
+          $('ul.tabs').tabs();
+        });
+      });
+
       app.controller('currentPageCtrl', function ($scope) {
-        $scope.page = "anasayfa.html";
+//        $scope.page = "anasayfa.html";
         $scope.goToPage = function (currentPage) {
           $scope.page = currentPage + '.html';
           console.log(123);
         };
       });
 
-      app.run(function ($rootScope) {
-        $rootScope.$on("$includeContentLoaded", function (event, templateName) {
-          console.log(templateName);
-          $('ul.tabs').tabs();
-          $('.tooltipped').tooltip({delay: 50});
-
+      app.controller('MyBackupListInfo', function ($scope) {
+        $scope.$on('$viewContentLoaded', function () {
+          console.log(333);
+          $('.tooltipped').tooltip();
         });
       });
+
 
       app.controller('MyBackupListInfo', function ($scope, $http) {
         $http.get('backup_settings/data.json').then(function (res) {
@@ -110,7 +107,7 @@
       $(document).ready(function () {
         $(".button-collapse").sideNav();
         $('.scrollspy').scrollSpy();
-      })
+      });
 </script>
 <script src="js/copy_directory.js"></script>
 <script src="js/create_zip.js"></script>

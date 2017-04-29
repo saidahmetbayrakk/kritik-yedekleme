@@ -1,22 +1,18 @@
-<ul class="collection" ng-controller="MyBackupListInfo">
-  <li class="collection-item avatar" ng-repeat="myBackup in myBackupList">
-    <i class="material-icons circle">folder</i>
-    <span class="title">{{myBackup.BackupName}}</span>
-    <p>Son yedekleme zamanı : {{myBackup.LastBackupTime}}<br>...
-      <a class="btn tooltipped" data-tooltip="I am tooltip">Hover me!</a>
-    </p>
-    <a href="#" class="secondary-content">
-      <span class="">
-        <i class="material-icons red-text text-accent-4 ">remove_circle</i>
-      </span>
-      <i class="material-icons lime-text text-darken-3">mode_edit</i>
-      <i class="material-icons purple-text text-darken-4">backup</i>
-    </a>
-  </li>
-</ul>
-<script>
-
-//  $(document).ready(function () {
-//    $('.tooltipped').tooltip({delay: 50});
-//  });
-</script>
+<div class="" ng-controller="MyBackupListInfo">
+  <ul class="collection" ng-view>
+    <li class="collection-item avatar" ng-repeat="myBackup in myBackupList">
+      <i class="material-icons circle">folder</i>
+      <span class="title">{{myBackup.BackupName}}</span>
+      <p>Son yedekleme zamanı : {{myBackup.LastBackupTime}}<br>...
+        <a class="btn tooltipped" data-tooltip="I am tooltip">Hover me!</a>
+      </p>
+      <a href="#" class="secondary-content">
+        <span class="">
+          <i class="material-icons red-text text-accent-4 ">remove_circle</i>
+        </span>
+        <i class="material-icons lime-text text-darken-3">mode_edit</i>
+        <i class="material-icons purple-text text-darken-4">backup</i>
+      </a>
+    </li>
+  </ul>
+</div>
