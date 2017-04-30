@@ -1,64 +1,27 @@
-<ul id="tabs-swipe-demo" class="tabs">
-  <li class="tab col s3"><a href="#test-swipe-1" class="active">Test 1</a></li>
-  <li class="tab col s3"><a href="#test-swipe-2">Test 2</a></li>
-  <li class="tab col s3"><a href="#test-swipe-3">Test 3</a></li>
-</ul>
-<div id="test-swipe-1" class="col s12">
-  <div class="row">
-    <div class="input-field col s6">
-      <input id="yedek_adi" type="text"/>
-      <label for="yedek_adi" class="">Yedek Adı:</label>
+<div class="row">
+  <form class="col s6">
+    <div class="row">
+      <div class="input-field col s6">
+        <input placeholder="Yedek Adı" id="backup_name" type="text" class="validate"/>
+        <label for="backup_name">Yedek Adı:</label>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="input-field col s6">
-      <div class="chips"></div>
-
-      <!--<textarea id="yedeklenecekler" class="materialize-textarea"></textarea>-->
-      <!--<label for="yedeklenecekler" class="">Yedeklenecek Klasörler:</label>-->
+    <div class="row">
+      <div class="input-field col s6">
+        <input placeholder="Yedeklenecek Klasör" id="backup_source_folder" type="text" class="validate"/>
+        <label for="backup_source_folder">Yedeklenecek Klasör:</label>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <p>
-    <input type="checkbox" id="gdrive" />
-    <label for="gdrive">Google Drive 'a yedeklensin mi?</label>
-    </p>
-    <p>
-    <input type="checkbox" id="yandex_disk" />
-    <label for="yandex_disk">Yandex Disk 'e yedeklensin mi?</label>
-    </p>
-    <p>
-    <input type="checkbox" id="microsoft_one_drive" />
-    <label for="microsoft_one_drive">Microsof One Drive ' a yedeklensin mi?</label>
-    </p>
-    <p>
-    <input type="checkbox" id="box" />
-    <label for="box">Box ' a yedeklensin mi?</label>
-    </p>
-  </div>
+    <div class="row">
+      <div class="input-field col s6">
+        <input placeholder="Yedekleme Periyodu" id="backup_period" type="number" class="validate"/>
+        <label for="backup_period">Yedekleme Periyodu:</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6">
+        <a class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>Kaydet</a>
+      </div>
+    </div>
+  </form>
 </div>
-<div id="test-swipe-2" class="col s12 red">Test 2</div>
-<div id="test-swipe-3" class="col s12 green">Test 3</div>
-<script>
-  $('.chips').material_chip();
-//  $('.chips-initial').material_chip({
-//    data: [{
-//        tag: 'Apple',
-//      }, {
-//        tag: 'Microsoft',
-//      }, {
-//        tag: 'Google',
-//      }],
-//  });
-//  $('.chips-placeholder').material_chip({
-//    placeholder: 'Enter a tag',
-//    secondaryPlaceholder: '+Tag',
-//  });
-//  $('.chips-autocomplete').material_chip({
-//    autocompleteData: {
-//      'Apple': null,
-//      'Microsoft': null,
-//      'Google': null
-//    }
-//  });
-</script>
