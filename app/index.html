@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE html>
 <html>
-
   <head>
     <meta charset="UTF-8">
   <title>Kritik Yedekleme</title>
@@ -45,12 +44,16 @@
 </head>
 
 <body ng-app="myApp" ng-controller="currentPageCtrl">
+  <!--<input type="file" multiple webkitdirectory id="fileURL"/>-->
+<script>
+
+
+
+</script>
 <div>
   <div ng-include="'inc/nav.html'"></div>
 </div>
 <div class="container scrollspy">
-  <!--<a href="#" onclick="copyFile();">Kopyala</a>-->
-  <!--<a href="#" onclick="createZip();">Ziple</a>-->
   <div ng-include="page"></div>
 </div>
 <div ng-include="'inc/footer.html'"></div>
@@ -58,50 +61,110 @@
       var app = angular.module('myApp', []);
 
       app.run(function ($rootScope) {
-        $rootScope.$on("$includeContentLoaded", function (event, templateName) {
-          console.log('templateName--' + templateName);
-//          $('ul.tabs').tabs();
+        $rootScope.$on("$includeContentLoaded", function (event, templateName) {//yüklenen sayfanın event i
           $('select').material_select();
         });
       });
 
-      app.controller('currentPageCtrl', function ($scope) {
+      app.controller('currentPageCtrl', function ($scope) {//sayfa değiştirme
         $scope.page = "anasayfa.html";
         $scope.goToPage = function (currentPage) {
           $scope.page = currentPage + '.html';
-          console.log(123);
         };
+      });
+
+      app.controller('addNewBackup', function ($scope) {//yeni yedekleme ekle
+        $scope.newBackupSetting = function () {
+          backupName = $scope.backupName;
+          backupSourceFolder = $scope.backupSourceFolder;
+//          backupSourceFolderArr = backupSourceFolder.split(",");
+          backupPeriod = $scope.backupPeriod;
+          localBackup = ($scope.localBackup) ? 1 : 0;
+          ftpBackup = ($scope.ftpBackup) ? 1 : 0;
+          googleDriveBackup = ($scope.googleDriveBackup) ? 1 : 0;
+          yandexDiskBackup = ($scope.yandexDiskBackup) ? 1 : 0;
+          emailSendOk = ($scope.emailSendOk) ? 1 : 0;
+          data =
+            {
+              "yedek_adi": backupName,
+              "yedeklenecekler": backupSourceFolder,
+              "periyot": backupPeriod,
+              "lokal_yedeklenecekmi": localBackup,
+              "ftp_yedeklenecekmi": ftpBackup,
+              "google_drive_yedeklenecekmi": googleDriveBackup,
+              "yandex_disk_yedeklenecekmi": yandexDiskBackup,
+              "e_posta_atilsinmi": emailSendOk
+            };
+          writeBackupsSettings(data, backupName);//yeni yedek için ayar dosyası oluşturur
+
+          backupListArr = getBackupsSettings().BackupList;//yedekleme listesi
+          backupListArr.push({
+            "BackupName": backupName,
+            "LastBackupTime": ""
+          });
+
+          writeBackupsSettings({"BackupList": backupListArr}, "backups");// yedekler listesine yeni kayıt
+        }
+      });
+
+      app.controller('passwordSettings', function ($scope) {
+        $scope.savePasswordSetting = function () {
+          localFolder = $scope.localFolder;
+          ftpHost = $scope.ftpHost;
+          ftpUser = $scope.ftpUser;
+          ftpPass = $scope.ftpPass;
+          ftpPort = $scope.ftpPort;
+
+          google_account = $scope.google_account;
+          google_pass = $scope.google_pass;
+
+          yandex_account = $scope.yandex_account;
+          yandex_pass = $scope.yandex_pass;
+
+          emailAdress = $scope.emailAdress;
+          data =
+            {
+              "localFolder": localFolder,
+              "ftpHost": ftpHost,
+              "ftpUser": ftpUser,
+              "ftpPass": ftpPass,
+              "ftpPort": ftpPort,
+              "google_account": google_account,
+              "google_pass": google_pass,
+              "yandex_account": yandex_account,
+              "yandex_pass": yandex_pass,
+              "emailAdress": emailAdress
+            };
+          writeBackupsSettings(data, "passwordSettings");//yeni yedek için ayar dosyası oluşturur
+        }
       });
 
       app.controller('MyBackupListInfo', function ($scope) {
         $scope.$on('$viewContentLoaded', function () {
-          console.log(333);
           $('.tooltipped').tooltip();
         });
       });
 
-
       app.controller('MyBackupListInfo', function ($scope, $http) {
-        $http.get('backup_settings/data.json').then(function (res) {
-          console.log(res.data.BackupList);
+        $http.get('backup_settings/backups.json').then(function (res) {
           $scope.myBackupList = res.data.BackupList;
         });
+        $scope.backupNow = function (backup_name) {
+          var source;
+          $http.get('backup_settings/' + backup_name + '.json').then(function (res1) {
+            source = res1.data.yedeklenecekler;
+            console.log("source");
+            console.log(source);
+
+            $http.get('backup_settings/passwordSettings.json').then(function (res2) {
+              target = res2.data.localFolder;
+              console.log("target");
+              console.log(target);
+              createZip(source, target, backup_name);
+            });
+          });
+        }
       });
-
-//      app.controller('AppCtrl', AppCtrl);
-//
-//      function AppCtrl($scope) {
-//        $scope.demo = {
-//          showTooltip: false,
-//          tipDirection: 'bottom'
-//        };
-//
-//        $scope.demo.delayTooltip = undefined;
-//        $scope.$watch('demo.delayTooltip', function (val) {
-//          $scope.demo.delayTooltip = parseInt(val, 10) || 0;
-//        });
-//      }
-
 
 
       /*Jquery Codes Begin*/
@@ -115,5 +178,4 @@
 <script src="js/fs.js"></script>
 <script src="js/notifications.js"></script>
 </body>
-
 </html>

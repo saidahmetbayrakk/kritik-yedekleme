@@ -1,1 +1,59 @@
-ayarlar
+<div class="row" ng-controller="passwordSettings">
+  <form class="col s12">
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="localFolder" type="text" class="validate" ng-model="localFolder"/>
+        <label for="localFolder">Lokal Yedekleme Yeri</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6">
+        <input id="ftp_host" type="text" class="validate" ng-model="ftpHost"/>
+        <label for="ftp_host">FTP Host</label>
+      </div>
+      <div class="input-field col s6">
+        <input id="ftp_user" type="text" class="validate" ng-model="ftpUser"/>
+        <label for="ftp_user">FTP Kullanıcı</label>
+      </div>
+      <div class="input-field col s6">
+        <input id="ftp_pass" type="text" class="validate" ng-model="ftpPass"/>
+        <label for="ftp_pass">FTP Şifresi</label>
+      </div>
+      <div class="input-field col s6">
+        <input id="port" type="text" class="validate" ng-model="ftpPort"/>
+        <label for="port">Port</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6">
+        <input  id="google_user" type="text" class="validate" ng-model="google_account"/>
+        <label for="google_user">Google Hesabı</label>
+      </div>
+      <div class="input-field col s6">
+        <input  id="google_pass" type="text" class="validate" ng-model="google_pass"/>
+        <label for="disabled">Google Şifresi</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6">
+        <input  id="yandex_user" type="text" class="validate" ng-model="yandex_account"/>
+        <label for="yandex_user">Yandex Hesabı</label>
+      </div>
+      <div class="input-field col s6">
+        <input  id="yandex_pass" type="text" class="validate" ng-model="yandex_pass"/>
+        <label for="yandex_pass">Yandex Şifresi</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6">
+        <input id="email" type="email" class="validate" ng-model="emailAdress"/>
+        <label for="email">Uyarı Gönderilecek E-posta</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6">
+        <a class="waves-effect waves-light btn" ng-click="savePasswordSetting()"><i class="material-icons right">cloud</i>Kaydet</a>
+      </div>
+    </div>
+  </form>
+</div>
